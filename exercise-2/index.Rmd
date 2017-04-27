@@ -1,0 +1,29 @@
+---
+title: "Plotly"
+author: "Austin Quach"
+date: "April 27, 2017"
+output: html_document
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(plotly)
+
+Primates <- c('Kobe Bryant', 'Shaq', 'Steph Curry', 'Isaiah Thomas', 'Metta World Peace', 'Andre Drummond', 'Dwight Howard')
+height <- c(77.95, 85.04, 74.8, 68.9, 79.13, 83.86, 83.07)
+ftPercent <- c(83.7, 52.7, 90.1, 87.6, 71.5, 38, 56.6)
+data <- data.frame(Primates, height, ftPercent)
+
+# Create a plotly object
+plot_ly(data, x = ~height, y = ~ftPercent, type = 'scatter',
+        mode = 'text', text = ~Primates, textposition = 'middle right',
+        textfont = list(color = '#000000', size = 16)) %>%
+# Pass object to the layout function
+        layout(title = 'NBA Height and Free Throw Percentage',
+             xaxis = list(title = 'Height (in)',
+                          zeroline = TRUE,
+                          range = c(65, 90)),
+             yaxis = list(title = 'ftPercent (%)',
+                          range = c(0,100)))
+
+```
